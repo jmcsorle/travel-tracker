@@ -2,12 +2,44 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Webpack Starter Kit</title>
+  <!-- <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+  <title>Wanderful Travel Adventures</title>
 </head>
 <body>
-  <img src="./images/turing-logo.png" alt="turing logo">
+  <main>
+    <header class="logo">
+      <h1 class="sr-only">Wanderful Travel Adventures</h1>
+        <img src="./images/turing-logo.png" alt="turing logo" width="100" />
+    </header>
+    <section class="login-screen">
+      <div class="login-grid">
+        <div class="login-left-side"></div>
+        <div class="login-right-side">
+        </div>
+      </div>
+    </section>
+    <section class="dashboard hidden">
+      <div class="outer-grid-dashboard">
+        <div class="left-side">
+          <div class="upcoming-trips">
+            These are upcoming trips
+          </div>
+          <div class="past-trips">
+            These are past trips
+          </div>
+        </div>
+        <div class="right-side">
+          <div class="annual-cost">
+            This is the annual cost
+          </div>
+          <div class="form">
+            This is the form
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
   
   <!-- Do not include the scripts.js or class files here - it is done by the webpack server -->
   <script src="bundle.js"></script>

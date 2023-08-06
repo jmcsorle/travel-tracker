@@ -1,3 +1,220 @@
 body {
-  background: radial-gradient(circle, rgba(63,94,251,1) 0%, rgba(252,70,107,1) 100%);
+  /* background: radial-gradient(circle, rgba(63,94,251,1) 0%, rgba(252,70,107,1) 100%); */
 }
+
+header {
+  display: flex;
+  align-items: center;
+  background: radial-gradient(circle, rgb(2, 131, 160) 0%, rgba(163, 222, 246, 1) 100%);
+  width: 100vw;
+  margin-left: 0;
+  padding: 0;
+  /* border-bottom: 3px solid #333333 */
+}
+
+/* #headerImg {
+  display: flex;
+  align-items: center;
+  margin: 0 0 1em 2em;
+} */
+
+/* .logo {
+  display: flex;
+  align-items: center;
+  margin: 0 0 1em 2em;
+} */
+
+/* ~~~~~ GRID COMPONENTS ~~~~~ */
+
+/* ChatGPT's suggestion for how do the login grid*/
+
+.login-grid {
+  display: grid;
+  height: 100vh;
+  width: 100vw;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr;
+  /* column-gap: 1em; */
+  grid-template-areas:
+    "login-left-side login-form";
+}
+
+.login-left-side,
+.login-right-side {
+  background-image: url('../images/ocean.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.login-left-side {
+  grid-area: login-left-side;
+}
+
+.login-right-side {
+  grid-area: login-form;
+  transform: scaleX(-1);
+}
+
+/* first attempt at login grid*/
+
+/* .login-grid {
+  display: grid;
+  height: 100vh;
+  width: 100vw;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr;
+  column-gap: 1em;
+  grid-template-areas:
+    "login-left-side login-form";
+}
+
+.login-left-side {
+  grid-area: login-left-side;
+  background-image: url('../images/ocean.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.login-form {
+  grid-area: login-form;
+  background-image: url('../images/ocean.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  transform: scaleX(-1);
+} */
+
+.outer-grid-dashboard {
+  margin-top: 20px;
+  display: grid;
+  height: 100vh;
+  width: 100vw;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr;
+  column-gap: 1em;
+  grid-template-areas:
+  "left-side right-side";
+}
+
+.left-side {
+  grid-area: left-side;
+  margin-left: 2em;
+  border: 3px solid pink;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 1fr;
+  grid-template-areas:
+  "upcoming-trips"
+  "past-trips";
+}
+
+.right-side {
+  grid-area: right-side;
+  margin-right: 2em;
+  border: 3px solid white;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 10% 90%;
+  grid-template-areas:
+  "annual-cost"
+  "form";
+}
+
+.annual-cost {
+  grid-area: annual-cost;
+  border: 3px solid black;
+}
+
+.form {
+  grid-area: form;
+  border: 3px solid yellow
+}
+
+.past-trips {
+  grid-area: past-trips;
+  border: 3px solid pink
+}
+
+.upcoming-trips {
+  grid-area: upcoming-trips;
+  border: 3px solid greenyellow
+}
+
+.rounded-corner {
+  border-radius: 12px;
+  -webkit-box-shadow: 0px 0px 2px 2px rgba(51,51,51,1);
+  -moz-box-shadow: 0px 0px 2px 2px rgba(51,51,51,1);
+  box-shadow: 0px 0px 2px 2px rgba(51,51,51,1);
+}
+
+.sr-only {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+
+.hidden {
+display: none!important;
+}
+
+/* ~~~~~ MEDIA QUERIES ~~~~~ */
+
+/* iPad / Tablet */
+/* @media only screen and (max-width: 768px) {
+
+} */
+
+
+@media only screen and (max-width: 425px) {
+
+  /* ~~~~~ GRID COMPONENTS ~~~~~ */
+
+  .outer-grid-dashboard {
+    display: grid;
+    height: 100vh;
+    width: 100vw;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr .1fr .9fr;
+    grid-template-areas:
+    "left-side"
+    "annual-cost"
+    "form";
+  }
+
+  .left-side {
+    grid-area: left-side;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr;
+    grid-template-areas:
+    "past-trips"
+    "upcoming-trips";
+  }
+
+  .annual-cost {
+    grid-area: annual-cost;
+  }
+
+  .form {
+    grid-area: form;
+  }
+
+  .past-trips {
+    grid-area: past-trips;
+  }
+
+  .upcoming-trips {
+    grid-area: upcoming-trips;
+  }
+
+}
+
+  
+
