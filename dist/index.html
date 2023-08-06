@@ -5,17 +5,38 @@
   <!-- <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
   <title>Wanderful Travel Adventures</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Marcellus&display=swap" rel="stylesheet">
 </head>
 <body>
   <main>
     <header class="logo">
-      <h1 class="sr-only">Wanderful Travel Adventures</h1>
-        <img src="./images/turing-logo.png" alt="turing logo" width="100" />
+      <img src="./images/turing-logo.png" alt="turing logo" width="100" />
+      <h1>Wanderful Travel Adventures</h1>
     </header>
     <section class="login-screen">
       <div class="login-grid">
         <div class="login-left-side"></div>
         <div class="login-right-side">
+          <form class="login-form">
+            <h2 class="form-heading">Please login</h2>
+            <p class="login-form">
+              <label class="username-field" for="username">
+                "Username "
+                <span aria-hidden="true">*</span>
+              </label>
+              <textarea class="username-field" id="username" name="username" autocomplete="off" type="textarea" value aria-required="true" aria-invalid="false" data-validate="notBlank"></textarea>
+            </p>
+            <p class="login-form">
+              <label class="password-field" for="password">
+                "Password "
+                <span aria-hidden="true">*</span>
+              </label>
+              <input type ="password" class="password-field" id="password" name="password" autocomplete="off" type="textarea" value aria-required="true" aria-invalid="false" data-validate="notBlank"></textarea>
+            </p>
+            <button class="login-submit-button" type="submit">"Login"</button>
+          </form>
         </div>
       </div>
     </section>
@@ -34,7 +55,42 @@
             This is the annual cost
           </div>
           <div class="form">
-            This is the form
+            <h2>Book Your Next Wanderful Adventure!</h2>
+            <form action="http://localhost:3001/api/v1/trips" method="post" id="createTripForm " class="create-trip-form">
+              <p class="create-trip-form">
+                <label class="choose-destination-label" for="destination">
+                  "Choose a Destination "
+                  <span aria-hidden="true">*</span>
+                </label>
+                <select name="destination" id="destination" class="choose-destination-dropdown" value aria-required="true" aria-invalid="false" data-validate="notBlank">
+                  <a href='#' aria-expanded="true">Choose a Destination</a>
+                </select>
+                <!-- <textarea class="choose-destination" id="destination" name="destination" autocomplete="off" type="textarea" value aria-required="true" aria-invalid="false" data-validate="notBlank"></textarea> -->
+              </p>
+              <p class="create-trip-form">
+                <label for="numTravelers">
+                  "Number of Travelers "
+                  <span aria-hidden="true">*</span>
+                </label>
+                <input type="number" id="numTravelers" placeholder="Enter number of travelers" min="1" value aria-required="true" aria-invalid="false" data-validate="notBlank">
+              </p>
+              <p"create-trip-form">
+                <label for="calendar" class="calendar-form">
+                  "Choose a Departure Date "
+                  <span aria-hidden="true">*</span>
+                </label>
+                <input type="date" id="calendar" class="calendar-form" value aria-required="true" aria-invalid="false" data-validate="notBlank">
+              </p>
+              <p class="create-trip-form">
+                <label for="duration">
+                  "Choose number of days "
+                  <span aria-hidden="true">*</span>
+                </label>
+                <input type="number" id="numTravelers" placeholder="Enter number of days" min="1" value aria-required="true" aria-invalid="false" data-validate="notBlank">
+              </p>
+              <p class="create-trip-form">The estimated cost for the trip is ____.</p>
+              <button class="submit-button" type="submit">"Submit your trip request"</button>
+            </form>
           </div>
         </div>
       </div>

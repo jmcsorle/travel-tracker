@@ -5,12 +5,12 @@ const getCurrentTraveler = (travelers, id) => {
   
   // ~~~~~~~~~Iteration 1 ~~~~~~~~~~~~~
   
-// const getTripInfo = (trips, userID, status) => {
-//     return trips.filter(trip => {
-//         return trip.userID === userID &&
-//         (trip.status === status || status === undefined)
-//     })
-// }
+const getTripInfo = (trips, userID, status) => {
+    return trips.filter(trip => {
+        return trip.userID === userID &&
+        (trip.status === status || status === undefined)
+    })
+}
 
 //Travelers dataSet: id = the traveler's ID
 //Trips dataSet: id = Trip#;  userID = traveler#; destinationID = destination#
@@ -32,6 +32,10 @@ const getUpcomingTrips = (trips, userID) => {
     return trips.filter(trip => {
         return trip.userID === userID && trip.status === 'pending'
     })
+}
+
+const getLoginInfo = () => {
+    
 }
 
 // const getPastTrips = (userID) => {

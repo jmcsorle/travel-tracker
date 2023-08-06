@@ -20,3 +20,4 @@ window.addEventListener('load', () => {
     console.log('UPCOMING TRIPS', getUpcomingTrips(fetchedData.trips, 25))
   });
 });
+loginButton.addEventListener('submit', getLoginInfo)
