@@ -30,7 +30,8 @@
                 User Name
                 <span aria-hidden="true">*</span>
               </label>
-              <input type="text" class="username-field" id="username" name="username" autocomplete="off" value aria-required="true" aria-invalid="false" data-validate="notBlank"></textarea>
+              <!-- <input type="text" class="username-field" id="username" name="username" autocomplete="off" value aria-required="true" aria-invalid="false" data-validate="notBlank" /> -->
+              <input type="text" class="username-field" id="username" name="username" />
             </p>
             <p class="login-form">
               <label class="login-password-field" for="password">
@@ -39,7 +40,8 @@
               </label>
               <input type ="password" class="password-field" id="password" name="password" autocomplete="off" type="textarea" value aria-required="true" aria-invalid="false" data-validate="notBlank"></textarea>
             </p>
-            <button class="login-submit-button" type="submit">Login</button>
+            <input type="submit" class="login-submit-button" type="submit" value="Login"/>
+            <!-- Login -->
             <p class="login-error hidden">Invalid login. Please try again.</p>
           </form>
         </div>

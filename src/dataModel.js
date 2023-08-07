@@ -1,8 +1,17 @@
+
+
 /* ~~~~~~~~~~ DATA MODEL ~~~~~~~~~~*/
-let currentTraveler = {};
+let travelerData = {};
 const getCurrentTraveler = (travelers, id) => {
   return travelers.find((traveler) => traveler.id === id);
 };
+const getTravelerData = () => {
+    return travelerData
+}
+
+const setTravelerData = (travelers, userID) => {
+    travelerData = getCurrentTraveler(travelers, userID)
+}
 
 // ~~~~~~~~~Iteration 1 ~~~~~~~~~~~~~
 
@@ -36,30 +45,7 @@ const getUpcomingTrips = (trips, userID) => {
   });
 };
 
-const verifyLogin = (e) => {
-  e.preventDefault();
-  const userID = +userNameField.value.match(/\d+/g);
-  console.log(userID);
-  const string = userNameField.value.slice(0, 8);
-  console.log(string);
-  if (
-    string === 'traveler' &&
-    Number(userID) > 0 &&
-    Number(userID) <= 50 &&
-    loginPasswordField.value === 'travel'
-  ) {
-    currentTraveler = getCurrentTraveler(fetchedData.travelers, Number(userID));
-    console.log('CURRENT TRAVELER FROM LOGIN FUNCTION', currentTraveler);
-    loginPage.classList.add('hidden');
-    dashboardPage.classList.remove('hidden');
-    //NEED DOM UPDATE FUNCTION HERE
-  } else {
-    loginError.classList.remove('hidden');
-    setTimeout(() => {
-      loginError.classList.add('hidden');
-    }, '3000');
-  }
-};
+
 
 //helper function for checking login credentials
 function isValidCredentials(username, password) {
@@ -123,5 +109,6 @@ export {
   getAllTrips,
   getPastTrips,
   getUpcomingTrips,
-  verifyLogin,
+  getTravelerData,
+  setTravelerData
 };

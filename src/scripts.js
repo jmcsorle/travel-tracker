@@ -13,11 +13,11 @@ import {
   getAllTrips,
   getPastTrips,
   getUpcomingTrips,
-  verifyLogin,
 } from './dataModel';
 
 import { 
     loginButton,
+    loginForm,
     loginPage,
     loginUserNameField,
     loginPasswordField,
@@ -33,19 +33,20 @@ import {
     calendarField,
     numDaysField,
     estimatedCostValue,
-    tripSubmitButton } from './domUpdates';
+    tripSubmitButton,
+    verifyLogin, } from './domUpdates';
 
 /* ~~~~~~~~~~ EVENT LISTENERS ~~~~~~~~~~*/
 window.addEventListener('load', () => {
   Promise.all(fetchPromises).then(() => {
-    console.log(
-      'CURRENT TRAVELR',
-      getCurrentTraveler(fetchedData.travelers, 25)
-    );
+    // console.log(
+    //   'CURRENT TRAVELR',
+    //   getCurrentTraveler(fetchedData.travelers, 25)
+    // );
     console.log('ALL TRIPS', getAllTrips(fetchedData.trips, 25, 'approved'));
     console.log('PAST TRIPS', getPastTrips(fetchedData.trips, 25));
     console.log('UPCOMING TRIPS', getUpcomingTrips(fetchedData.trips, 25));
   });
 });
-loginButton.addEventListener('submit', verifyLogin);
+loginForm.addEventListener('submit', verifyLogin);
 console.log(loginButton);

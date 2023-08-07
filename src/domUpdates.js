@@ -1,5 +1,9 @@
+import { setTravelerData, getTravelerData } from './dataModel';
+import { fetchedData } from './apiCalls';
+
 /* ~~~~~~~~~~ Query Selectors  ~~~~~~~~~~*/
 const loginPage = document.querySelector('.login-screen');
+const loginForm = document.querySelector('.login-form')
 const loginUserNameField = document.querySelector('.username-field');
 const loginPasswordField = document.querySelector('.password-field');
 const loginButton = document.querySelector('.login-submit-button');
@@ -16,6 +20,30 @@ const calendarField = document.querySelector('#calendar');
 const numDaysField = document.querySelector('#numDays');
 const estimatedCostValue = document.querySelector('#estimatedCost');
 const tripSubmitButton = document.querySelector('.trip-submit-button');
+
+const verifyLogin = (e) => {
+    e.preventDefault();
+    const userID = +loginUserNameField.value.match(/\d+/g);
+    console.log(userID);
+    const string = loginUserNameField.value.slice(0, 8);
+    console.log(string);
+    if (
+      string === 'traveler' &&
+      Number(userID) > 0 &&
+      Number(userID) <= 50 &&
+      loginPasswordField.value === 'travel'
+    ) {
+        setTravelerData(fetchedData.travelers, userID)
+      loginPage.classList.add('hidden');
+      dashboardPage.classList.remove('hidden');
+      //NEED DOM UPDATE FUNCTION HERE
+    } else {
+      loginError.classList.remove('hidden');
+      setTimeout(() => {
+        loginError.classList.add('hidden');
+      }, 3000);
+    }
+  };
 
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 
@@ -125,6 +153,7 @@ const tripSubmitButton = document.querySelector('.trip-submit-button');
 //   });
 export {
   loginPage,
+  loginForm,
   loginUserNameField,
   loginPasswordField,
   loginButton,
@@ -141,4 +170,5 @@ export {
   numDaysField,
   estimatedCostValue,
   tripSubmitButton,
+  verifyLogin
 };
