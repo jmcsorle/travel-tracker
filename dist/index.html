@@ -14,6 +14,10 @@
     <header class="logo">
       <img src="./images/turing-logo.png" alt="turing logo" width="100" />
       <h1>Wanderful Travel Adventures</h1>
+      <div class="welcome hidden">
+        <h2>Welcome</h2>
+        <p class="welcom-user"></p>
+      </div>
     </header>
     <section class="login-screen">
       <div class="login-grid">
@@ -22,20 +26,21 @@
           <form class="login-form">
             <h2 class="form-heading">Please login</h2>
             <p class="login-form">
-              <label class="username-field" for="username">
-                "Username "
+              <label class="login-username-field" for="username">
+                User Name
                 <span aria-hidden="true">*</span>
               </label>
-              <textarea class="username-field" id="username" name="username" autocomplete="off" type="textarea" value aria-required="true" aria-invalid="false" data-validate="notBlank"></textarea>
+              <input type="text" class="username-field" id="username" name="username" autocomplete="off" value aria-required="true" aria-invalid="false" data-validate="notBlank"></textarea>
             </p>
             <p class="login-form">
-              <label class="password-field" for="password">
-                "Password "
+              <label class="login-password-field" for="password">
+                Password
                 <span aria-hidden="true">*</span>
               </label>
               <input type ="password" class="password-field" id="password" name="password" autocomplete="off" type="textarea" value aria-required="true" aria-invalid="false" data-validate="notBlank"></textarea>
             </p>
-            <button class="login-submit-button" type="submit">"Login"</button>
+            <button class="login-submit-button" type="submit">Login</button>
+            <p class="login-error hidden">Invalid login. Please try again.</p>
           </form>
         </div>
       </div>
@@ -59,7 +64,7 @@
             <form action="http://localhost:3001/api/v1/trips" method="post" id="createTripForm " class="create-trip-form">
               <p class="create-trip-form">
                 <label class="choose-destination-label" for="destination">
-                  "Choose a Destination "
+                  Choose a Destination
                   <span aria-hidden="true">*</span>
                 </label>
                 <select name="destination" id="destination" class="choose-destination-dropdown" value aria-required="true" aria-invalid="false" data-validate="notBlank">
@@ -69,27 +74,27 @@
               </p>
               <p class="create-trip-form">
                 <label for="numTravelers">
-                  "Number of Travelers "
+                  Number of Travelers
                   <span aria-hidden="true">*</span>
                 </label>
                 <input type="number" id="numTravelers" placeholder="Enter number of travelers" min="1" value aria-required="true" aria-invalid="false" data-validate="notBlank">
               </p>
               <p"create-trip-form">
                 <label for="calendar" class="calendar-form">
-                  "Choose a Departure Date "
+                  Choose a Departure Date
                   <span aria-hidden="true">*</span>
                 </label>
                 <input type="date" id="calendar" class="calendar-form" value aria-required="true" aria-invalid="false" data-validate="notBlank">
               </p>
               <p class="create-trip-form">
                 <label for="duration">
-                  "Choose number of days "
+                  Choose number of days
                   <span aria-hidden="true">*</span>
                 </label>
-                <input type="number" id="numTravelers" placeholder="Enter number of days" min="1" value aria-required="true" aria-invalid="false" data-validate="notBlank">
+                <input type="number" id="numDays" placeholder="Enter number of days" min="1" value aria-required="true" aria-invalid="false" data-validate="notBlank">
               </p>
-              <p class="create-trip-form">The estimated cost for the trip is ____.</p>
-              <button class="submit-button" type="submit">"Submit your trip request"</button>
+              <p class="create-trip-form" id="estimatedCost">The estimated cost for the trip is $0.00.</p>
+              <button class="trip-submit-button" type="submit">Submit</button>
             </form>
           </div>
         </div>

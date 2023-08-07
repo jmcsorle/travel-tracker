@@ -1,41 +1,70 @@
 /* ~~~~~~~~~~ DATA MODEL ~~~~~~~~~~*/
+let currentTraveler = {};
 const getCurrentTraveler = (travelers, id) => {
-    return travelers.find(traveler => traveler.id === id);
+  return travelers.find((traveler) => traveler.id === id);
 };
-  
-  // ~~~~~~~~~Iteration 1 ~~~~~~~~~~~~~
-  
-const getTripInfo = (trips, userID, status) => {
-    return trips.filter(trip => {
-        return trip.userID === userID &&
-        (trip.status === status || status === undefined)
-    })
-}
+
+// ~~~~~~~~~Iteration 1 ~~~~~~~~~~~~~
+
+//helper function to get trip info
+// const getTripInfo = (trips, userID, status) => {
+//     return trips.filter(trip => {
+//         return trip.userID === userID &&
+//         (trip.status === status || status === undefined)
+//     })
+// }
 
 //Travelers dataSet: id = the traveler's ID
 //Trips dataSet: id = Trip#;  userID = traveler#; destinationID = destination#
 //Destinations dataSet id = destination#
 
 const getAllTrips = (trips, userID) => {
-    return trips.filter(trip => {
-        return trip.userID === userID
-    })
-}
+  return trips.filter((trip) => {
+    return trip.userID === userID;
+  });
+};
 
 const getPastTrips = (trips, userID) => {
-    return trips.filter(trip => {
-        return trip.userID === userID && trip.status === 'approved'
-    })
-}
+  return trips.filter((trip) => {
+    return trip.userID === userID && trip.status === 'approved';
+  });
+};
 
 const getUpcomingTrips = (trips, userID) => {
-    return trips.filter(trip => {
-        return trip.userID === userID && trip.status === 'pending'
-    })
-}
+  return trips.filter((trip) => {
+    return trip.userID === userID && trip.status === 'pending';
+  });
+};
 
-const getLoginInfo = () => {
-    
+const verifyLogin = (e) => {
+  e.preventDefault();
+  const userID = +userNameField.value.match(/\d+/g);
+  console.log(userID);
+  const string = userNameField.value.slice(0, 8);
+  console.log(string);
+  if (
+    string === 'traveler' &&
+    Number(userID) > 0 &&
+    Number(userID) <= 50 &&
+    loginPasswordField.value === 'travel'
+  ) {
+    currentTraveler = getCurrentTraveler(fetchedData.travelers, Number(userID));
+    console.log('CURRENT TRAVELER FROM LOGIN FUNCTION', currentTraveler);
+    loginPage.classList.add('hidden');
+    dashboardPage.classList.remove('hidden');
+    //NEED DOM UPDATE FUNCTION HERE
+  } else {
+    loginError.classList.remove('hidden');
+    setTimeout(() => {
+      loginError.classList.add('hidden');
+    }, '3000');
+  }
+};
+
+//helper function for checking login credentials
+function isValidCredentials(username, password) {
+  const validUsernamePattern = /^traveler\d+$/;
+  return validUsernamePattern.test(username) && password === 'travel';
 }
 
 // const getPastTrips = (userID) => {
@@ -43,23 +72,21 @@ const getLoginInfo = () => {
 //     getTripInfo(fetchedData.trips, 50, 'approved')
 // }
 
-  
 //   const getTotalAnnualSpend = (trips, destinations, id, year) => {
-//     const filterdTripsByYear = trips.filter(trip => trip.userID === id && trip.) 
+//     const filterdTripsByYear = trips.filter(trip => trip.userID === id && trip.)
 
 //     }
-    
-      // Total amount I have spent on trips this year. This should be calculated from the trips data and include a travel agent’s 10% fee
 
-      //look up ID in trips - get the desitnation ID, then look up destination ID in destinations and then do math :-(
+// Total amount I have spent on trips this year. This should be calculated from the trips data and include a travel agent’s 10% fee
+
+//look up ID in trips - get the desitnation ID, then look up destination ID in destinations and then do math :-(
 //   }
-  
-  // ~~~~~~~~~Iteration 2 ~~~~~~~~~~~~~
-  
-  
-  //DOM Manipulation
 
-  //have a collection of methods that do nothing other than pull the information from the form - getSelectedTripDate; getSelectedDestination, getSelectedNumberOfTravelers - when you want to display a new trip, you will pull these pieces and then stuff them back into the DOM
+// ~~~~~~~~~Iteration 2 ~~~~~~~~~~~~~
+
+//DOM Manipulation
+
+//have a collection of methods that do nothing other than pull the information from the form - getSelectedTripDate; getSelectedDestination, getSelectedNumberOfTravelers - when you want to display a new trip, you will pull these pieces and then stuff them back into the DOM
 
 //   const displayNewTrip = () => {
 //       //show trip details (date, duration, number of travelers, destination)
@@ -74,30 +101,27 @@ const getLoginInfo = () => {
 //         // number of travelers
 //         // choose from a list of destinations
 //         // estimated cost (with a 10% travel agent fee) for the trip
-  
+
 //   }
-  
-  //Iteration 4 - Login
-  
+
+//Iteration 4 - Login
+
 //   const getUserLogin = () => {
 //       //get value from userName field and password field
 //   }
-  
-  /*
+
+/*
   
   username: traveler50 (where 50 is the ID of the user)
   password: travel
   
   */
-  
-  
-
 
 export {
-    getCurrentTraveler,
-    // getTripInfo
-    getAllTrips,
-    getPastTrips,
-    getUpcomingTrips
-}
-
+  getCurrentTraveler,
+  // getTripInfo
+  getAllTrips,
+  getPastTrips,
+  getUpcomingTrips,
+  verifyLogin,
+};
