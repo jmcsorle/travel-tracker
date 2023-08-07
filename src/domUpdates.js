@@ -1,14 +1,21 @@
-
 /* ~~~~~~~~~~ Query Selectors  ~~~~~~~~~~*/
+const loginPage = document.querySelector('.login-screen');
+const loginUserNameField = document.querySelector('.username-field');
+const loginPasswordField = document.querySelector('.password-field');
 const loginButton = document.querySelector('.login-submit-button');
-
-/* ~~~~~~~~~~ Login form submit event  ~~~~~~~~~~*/
-
-
-
-
-
-
+const loginError = document.querySelector('.login-error');
+const welcomeSection = document.querySelector('.welcome');
+const welcomeUserName = document.querySelector('.welcome-user');
+const dashboardPage = document.querySelector('.dashboard');
+const tripsUpcoming = document.querySelector('.upcoming-trips');
+const tripsPast = document.querySelector('.past-trips');
+const annualCost = document.querySelector('.annual-cost');
+const chooseDestinationField = document.querySelector('#destination');
+const numTravlersField = document.querySelector('#numTravelers');
+const calendarField = document.querySelector('#calendar');
+const numDaysField = document.querySelector('#numDays');
+const estimatedCostValue = document.querySelector('#estimatedCost');
+const tripSubmitButton = document.querySelector('.trip-submit-button');
 
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 
@@ -27,30 +34,30 @@ const loginButton = document.querySelector('.login-submit-button');
 //     displayWeeklyStepCount(activity, currentUser, activityCurrentDate);
 //     displayRandomQuote();
 //     setMotivationLevel('level');
-  
+
 //     const formElement = document
 //       .getElementById('form')
 //       .addEventListener('submit', function (event) {
 //         console.log('Form submitted!');
 //         event.preventDefault();
-  
+
 //         const formData = new FormData(event.target);
-  
+
 //         const postUserInput = {
 //           userID: currentUser.id,
 //           date: '2023/07/02',
 //           numOunces: formData.get('waterIntake'),
 //         };
-  
+
 //         console.log('Form submitted!');
-  
+
 //         postSavedHydration(postUserInput)
 //           .then((json) => {
 //             displayNewHydrationEntry(json);
 //             console.log(json);
 //           })
 //           .catch((err) => console.error(`Error at: ${err}`));
-  
+
 //         event.target.reset();
 //       });
 
@@ -91,7 +98,7 @@ const loginButton = document.querySelector('.login-submit-button');
 //       advice: 'Keep pushing your limits and inspiring others!',
 //     },
 //   };
-  
+
 //   const setMotivationLevel = (level) => {
 //     let motivationLevel = motivationLevels[level];
 //     if (motivationLevel) {
@@ -112,8 +119,26 @@ const loginButton = document.querySelector('.login-submit-button');
 //       motivationDropdown.value = '';
 //     }
 //   };
-  
+
 //   motivationDropdown.addEventListener('change', (event) => {
 //     setMotivationLevel(event.target.value);
 //   });
-  
+export {
+  loginPage,
+  loginUserNameField,
+  loginPasswordField,
+  loginButton,
+  loginError,
+  dashboardPage,
+  welcomeSection,
+  welcomeUserName,
+  tripsUpcoming,
+  tripsPast,
+  annualCost,
+  chooseDestinationField,
+  numTravlersField,
+  calendarField,
+  numDaysField,
+  estimatedCostValue,
+  tripSubmitButton,
+};

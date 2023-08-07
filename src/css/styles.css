@@ -4,8 +4,8 @@ body {
 }
 
 header {
-	/* display: flex;
-	align-items: center; */
+	display: flex;
+	align-items: center;
 	background: radial-gradient(circle, rgb(2, 131, 160) 0%, rgba(163, 222, 246, 1) 100%);
 	width: 100vw;
 	margin-left: 0;
@@ -18,14 +18,13 @@ header img {
 }
 
 h1 {
-  display: block;
   border-color: 1px solid azure;
   background-color: azure;
   padding: .25em;
   border-radius: 12px;
   font-size: 2.5rem;
   max-width: 30%;
-  text-align: center;
+
 }
 
 h2 {
