@@ -75,13 +75,15 @@ const getUpcomingTrips = (trips, userID) => {
   });
 };
 
-const findDestinationName = () => {
-  const destinationName = fetchedData.destinations.find((destination) => {
-    if (destination.id === tripData.destinationID) {
-      return destinationName;
-    }
-  });
-};
+// const findDestinationName = () => {
+//   const destinationName = fetchedData.destinations.find((destination) => {
+//     if (destination.id === tripData.destinationID) {
+//       return destinationName;
+//     }
+//   });
+// };
+
+//calculation to feed into DOM function
 
 const getEstimatedLodgingCosts = (destinationID, duration, numTravelers) => {
   const lodgingCosts = fetchedData.destinations.reduce((acc, destination) => {
