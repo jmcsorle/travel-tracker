@@ -127,7 +127,7 @@ label {
 .right-side {
 	grid-area: right-side;
 	padding: 0 1em;
-	border: 3px solid white;
+	border: 3px solid rgb(10, 125, 44);
 	display: grid;
 	grid-template-columns: 100%;
 	grid-template-rows: 10% 90%;
@@ -146,15 +146,18 @@ label {
 	border: 3px solid yellow;
 }
 
-.past-trips {
-	grid-area: past-trips;
-	border: 3px solid pink;
-}
-
 .upcoming-trips {
 	grid-area: upcoming-trips;
 	border: 3px solid greenyellow;
+  overflow-y: scroll;
 }
+
+.past-trips {
+	grid-area: past-trips;
+	border: 3px solid pink;
+  overflow-y: scroll;
+}
+
 /* } */
 
 .rounded-corner {
