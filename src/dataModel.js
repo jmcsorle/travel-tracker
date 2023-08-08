@@ -68,7 +68,6 @@ const getPastTrips = (trips, userID) => {
   const filteredTrips = trips.filter((trip) => {
    return trip.userID === userID && trip.status === 'approved';
   });
-  console.log('FILTERED TRIPS FROM PAST', filteredTrips);
   return filteredTrips;
 };
 
