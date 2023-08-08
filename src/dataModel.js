@@ -66,9 +66,9 @@ const getAllTrips = (trips, userID) => {
 
 const getPastTrips = (trips, userID) => {
   const filteredTrips = trips.filter((trip) => {
-    trip.userID === userID && trip.status === 'approved';
+   return trip.userID === userID && trip.status === 'approved';
   });
-  console.log(filteredTrips);
+  console.log('FILTERED TRIPS FROM PAST', filteredTrips);
   return filteredTrips;
 };
 
@@ -127,16 +127,13 @@ const getTotalEstimatedTripCosts = (
 const getAnnualTripCosts = (userID, year) => {
   year = chooseYear.value;
   userID = travelerData.id;
-  console.log('USER ID', userID);
-  console.log('FETCHED DATA', fetchedData.trips);
   const filteredTrips = fetchedData.trips.filter(
     (trip) =>
       trip.date.split('/')[0] === year &&
       trip.userID === userID &&
       trip.status === 'approved'
   );
-  console.log('FILTERED TRIPS', filteredTrips);
-  const totalCost = fetchedData.destinations.reduce((acc, destination) => {
+ const totalCost = fetchedData.destinations.reduce((acc, destination) => {
     filteredTrips.forEach((trip) => {
       if (trip.destinationID === destination.id) {
         const estimatedLodging =
@@ -147,13 +144,12 @@ const getAnnualTripCosts = (userID, year) => {
           trip.travelers * destination.estimatedFlightCostPerPerson;
         const subtotal = estimatedLodging + estimatedFlightCosts;
         const travelAgentFee = subtotal * 0.1;
-        acc += (subtotal + travelAgentFee).toFixed(2);
+        acc += subtotal + travelAgentFee;
       }
     });
-    return acc;
+    return acc
   }, 0);
-  console.log('TOTAL COST', totalCost);
-  return totalCost;
+  return totalCost.toFixed(2);
 };
 
 export {
