@@ -40,6 +40,9 @@ import {
   verifyLogin,
   setListOfDestinations,
   createNewTrip,
+//   setListOfYears,
+  displayAnnualSpend,
+  chooseYear
 } from './domUpdates';
 
 /* ~~~~~~~~~~ EVENT LISTENERS ~~~~~~~~~~*/
@@ -49,8 +52,14 @@ window.addEventListener('load', () => {
   });
 });
 
+chooseYear.addEventListener('change', () => {
+    displayAnnualSpend()
+})
+
 createNewTrip.addEventListener('input', () => {
-  if (numTravelersField.value && numDaysField.value) {
+    if (!chooseDestinationField.value) {
+        estimatedCostValue.innerText = `Please fill out all fields to get an estimated cost.`;
+    } else if (numTravelersField.value && numDaysField.value) {
     const destinationID = parseInt(chooseDestinationField.value);
     const duration = parseInt(numDaysField.value);
     const numTravelers = parseInt(numTravelersField.value);
@@ -65,10 +74,10 @@ createNewTrip.addEventListener('input', () => {
       numTravelers
     );
     estimatedCostValue.innerText = `Estimated cost for this trip: ${totalCost}`;
-  } else {
-    estimatedCostValue.innerText = `Please fill out all fields to get an estimated cost.`;
-  }
+//   }
+}
 });
+// });
 
 loginForm.addEventListener('submit', verifyLogin);
 createNewTrip.addEventListener('submit', (e) => {

@@ -31,6 +31,12 @@ h2 {
   font-size: 2rem;
 }
 
+.amount-spent,
+#estimatedCost {
+  font-weight: bold;
+  color: #19819A
+}
+
 /* #headerImg {
 	display: flex;
 	align-items: center;

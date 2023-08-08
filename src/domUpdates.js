@@ -1,9 +1,15 @@
-import { setTravelerData, getTravelerData } from './dataModel';
+import {
+  setTravelerData,
+  getTravelerData,
+  getAnnualTripCosts,
+  travelerData,
+  getPastTrips
+} from './dataModel';
 import { fetchedData } from './apiCalls';
 
 /* ~~~~~~~~~~ Query Selectors  ~~~~~~~~~~*/
 const loginPage = document.querySelector('.login-screen');
-const loginForm = document.querySelector('.login-form')
+const loginForm = document.querySelector('.login-form');
 const loginUserNameField = document.querySelector('.username-field');
 const loginPasswordField = document.querySelector('.password-field');
 const loginButton = document.querySelector('.login-submit-button');
@@ -15,6 +21,8 @@ const createNewTrip = document.querySelector('#createTripForm');
 const tripsUpcoming = document.querySelector('.upcoming-trips');
 const tripsPast = document.querySelector('.past-trips');
 const annualCost = document.querySelector('.annual-cost');
+const amountSpent = document.querySelector('.amount-spent');
+const chooseYear = document.querySelector('.choose-year-dropdown');
 const chooseDestinationField = document.querySelector('#destination');
 const numTravelersField = document.querySelector('#numTravelers');
 const calendarField = document.querySelector('#calendar');
@@ -25,44 +33,56 @@ const tripSubmitButton = document.querySelector('.trip-submit-button');
 /* ~~~~~~~ DOM Manipulation Functions ~~~~~~~*/
 
 const verifyLogin = (e) => {
-    e.preventDefault();
-    const userID = +loginUserNameField.value.match(/\d+/g);
-    const string = loginUserNameField.value.slice(0, 8);
-    if (
-      string === 'traveler' &&
-      Number(userID) > 0 &&
-      Number(userID) <= 50 &&
-      loginPasswordField.value === 'travel'
-    ) {
-        setTravelerData(fetchedData.travelers, userID)
-      loginPage.classList.add('hidden');
-      dashboardPage.classList.remove('hidden');
-    } else {
-      loginError.classList.remove('hidden');
-      setTimeout(() => {
-        loginError.classList.add('hidden');
-      }, 3000);
-    }
-  };
+  e.preventDefault();
+  const userID = +loginUserNameField.value.match(/\d+/g);
+  const string = loginUserNameField.value.slice(0, 8);
+  if (
+    string === 'traveler' &&
+    Number(userID) > 0 &&
+    Number(userID) <= 50 &&
+    loginPasswordField.value === 'travel'
+  ) {
+    setTravelerData(fetchedData.travelers, userID);
+    loginPage.classList.add('hidden');
+    dashboardPage.classList.remove('hidden');
+    getPastTrips(fetchedData.trips, travelerData.id)
+  } else {
+    loginError.classList.remove('hidden');
+    setTimeout(() => {
+      loginError.classList.add('hidden');
+    }, 3000);
+  }
+};
 
-  const setListOfDestinations = () => {
-    return fetchedData.destinations.forEach(destination => {
-        chooseDestinationField.innerHTML += `
+const setListOfDestinations = () => {
+  return fetchedData.destinations.forEach((destination) => {
+    chooseDestinationField.innerHTML += `
         <option value="${destination.id}">
         ${destination.destination}
         </option>
-        `
-    })
-  }
+        `;
+  });
+};
 
-  const displayPendingTrips = () => {
-
+const displayAnnualSpend = () => {
+  const year = chooseYear.value;
+  console.log("YEAR", year)
+  const userID = travelerData.id;
+  console.log("TRAVELER ID", travelerData.id)
+  const annualSpend = getAnnualTripCosts(userID, year);
+  if (year) {
+    amountSpent.classList.remove('hidden');
+    return (amountSpent.innerText = `You spent $${annualSpend} in ${year}.`);
+  } else {
+    amountSpent.classList.add('hidden');
   }
+};
+
+const displayPendingTrips = () => {};
 
 //   const getDOMUpdates = () {
 
 //   }
-
 
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 
@@ -190,6 +210,9 @@ export {
   numDaysField,
   estimatedCostValue,
   tripSubmitButton,
+  chooseYear,
   verifyLogin,
-  setListOfDestinations
+  setListOfDestinations,
+  //   setListOfYears,
+  displayAnnualSpend,
 };

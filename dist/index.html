@@ -59,7 +59,22 @@
         </div>
         <div class="right-side">
           <div class="annual-cost">
-            This is the annual cost
+            <label class="choose-year" for="year">
+              See Annual Spend
+              <span aria-hidden="true">*</span>
+            </label>
+            <select name="year" id="year" class="choose-year-dropdown" aria-required="true">
+              <a href='#' aria-expanded="true">See Annual Spend</a>
+              <option value="">Choose a Year</option>
+              <option value="2017">2017</option>
+              <option value="2018">2018</option>
+              <option value="2019">2019</option>
+              <option value="2020">2020</option>
+              <option value="2021">2021</option>
+              <option value="2022">2022</option>
+              <option value="2023">2023</option>
+            </select>
+            <p class="amount-spent hidden">You spent</p>
           </div>
           <div class="new-trip-form">
             <h2>Book Your Next Wanderful Adventure!</h2>
