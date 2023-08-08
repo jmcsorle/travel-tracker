@@ -1,31 +1,61 @@
+import {
+  chooseDestinationField,
+  numTravelersField,
+  calendarField,
+  numDaysField,
+} from './domUpdates';
 
+import { fetchedData } from './apiCalls';
 
 /* ~~~~~~~~~~ DATA MODEL ~~~~~~~~~~*/
 let travelerData = {};
+
+let tripData = {
+  newTripID: 0,
+  destinationID: 0,
+  destination: '',
+  estimatedLodgingCosts: 0,
+  estimatedFlightCostPerPerson: 0,
+  totalTripCosts: 0,
+  numTravelers: 0,
+  date: 'yyyy/mm/dd',
+  duration: 0,
+  status: '',
+  suggestedActivities: [],
+};
+
+/* ~~~~~~~~ Traveler Data Functions ~~~~~~~~ */
+
 const getCurrentTraveler = (travelers, id) => {
   return travelers.find((traveler) => traveler.id === id);
 };
-const getTravelerData = () => {
-    return travelerData
-}
 
 const setTravelerData = (travelers, userID) => {
-    travelerData = getCurrentTraveler(travelers, userID)
-}
+  travelerData = getCurrentTraveler(travelers, userID);
+};
 
-// ~~~~~~~~~Iteration 1 ~~~~~~~~~~~~~
+const getTravelerData = () => {
+  return travelerData;
+};
 
-//helper function to get trip info
-// const getTripInfo = (trips, userID, status) => {
-//     return trips.filter(trip => {
-//         return trip.userID === userID &&
-//         (trip.status === status || status === undefined)
-//     })
-// }
+/* ~~~~~~~~ Input Form Data Functions ~~~~~~~~ */
 
-//Travelers dataSet: id = the traveler's ID
-//Trips dataSet: id = Trip#;  userID = traveler#; destinationID = destination#
-//Destinations dataSet id = destination#
+const getTravelerInputs = () => {
+  const newTripData = {
+    id: parseInt(fetchedData.trips.length + 1),
+    userID: travelerData.id,
+    destinationID: parseInt(chooseDestinationField.value),
+    travelers: parseInt(numTravelersField.value),
+    date: calendarField.value.split('-').join('/'),
+    duration: parseInt(numDaysField.value),
+    status: 'pending',
+    suggestedActivities: [],
+  };
+
+  return newTripData;
+};
+
+/* ~~~~~~~~ Trip Data Functions ~~~~~~~~ */
 
 const getAllTrips = (trips, userID) => {
   return trips.filter((trip) => {
@@ -45,7 +75,77 @@ const getUpcomingTrips = (trips, userID) => {
   });
 };
 
+const findDestinationName = () => {
+  const destinationName = fetchedData.destinations.find((destination) => {
+    if (destination.id === tripData.destinationID) {
+      return destinationName;
+    }
+  });
+};
 
+const getEstimatedLodgingCosts = (destinationID, duration, numTravelers) => {
+  const costs = fetchedData.destinations.reduce((acc, destination) => {
+    if (destination.id === destinationID)
+      acc = destination.estimatedLodgingCostPerDay * duration * numTravelers;
+    return acc;
+  }, 0);
+  return costs;
+};
+
+const getFlightCostOneTraveler = (destinationID) => {
+  const flightCost = fetchedData.destinations.find((destination) => {
+    if (destination.id === destinationID) {
+      return destination.estimatedFlightCostPerPerson;
+    }
+    return flightCost;
+  });
+};
+
+const getTotalEstimatedTripCosts = () => {
+  const flightCosts = tripData.numTravelers * estimatedFlightCostPerPerson;
+  const lodgingCosts = tripData.estimatedLodgingCosts * tripData.duration;
+  const travelerAgentFee = (flightCosts + lodgingCosts) * 0.1;
+  const totalTravelCost = flightCosts + lodgingCosts + travelerAgentFee;
+  return totalTravelCost;
+};
+
+const setTripData = (e) => {
+  e.preventDefault();
+  tripData.newTripID = parseInt(fetchedData.trips.length + 1);
+  tripData.destinationID = parseInt(chooseDestinationField.value);
+  tripData.destination = findDestinationName();
+  tripData.numTravelers = parseInt(numTravelersField.value);
+  tripData.date = calendarField.value.split('-').join('/');
+  tripData.duration = parseInt(numDaysField.value);
+  tripData.estimatedLodgingCosts = getEstimatedLodgingCosts();
+  tripData.estimatedFlightCostPerPerson = getFlightCostOneTraveler();
+  tripData.totalTripCosts = getTotalEstimatedTripCosts();
+  tripData.status = 'pending';
+  console.log('UPDATED TRIP DATA', tripData);
+};
+
+const getAnnualTripsByUser = (userID) => {
+  const totalTrips = fetchedData.trips.reduce((acc, trip) => {
+    if (trip.userID === userID) {
+      return (acc += 1);
+    }
+    return totalTrips;
+  }, 0);
+};
+
+// ~~~~~~~~~Iteration 1 ~~~~~~~~~~~~~
+
+//helper function to get trip info
+// const getTripInfo = (trips, userID, status) => {
+//     return trips.filter(trip => {
+//         return trip.userID === userID &&
+//         (trip.status === status || status === undefined)
+//     })
+// }
+
+//Travelers dataSet: id = the traveler's ID
+//Trips dataSet: id = Trip#;  userID = traveler#; destinationID = destination#
+//Destinations dataSet id = destination#
 
 //helper function for checking login credentials
 function isValidCredentials(username, password) {
@@ -110,5 +210,8 @@ export {
   getPastTrips,
   getUpcomingTrips,
   getTravelerData,
-  setTravelerData
+  setTravelerData,
+  setTripData,
+  getAnnualTripsByUser,
+  getTravelerInputs,
 };

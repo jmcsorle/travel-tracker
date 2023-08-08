@@ -61,18 +61,18 @@
           <div class="annual-cost">
             This is the annual cost
           </div>
-          <div class="form">
+          <div class="new-trip-form">
             <h2>Book Your Next Wanderful Adventure!</h2>
-            <form action="http://localhost:3001/api/v1/trips" method="post" id="createTripForm " class="create-trip-form">
+            <form action="http://localhost:3001/api/v1/trips" method="post" id="createTripForm" class="create-trip-form">
               <p class="create-trip-form">
                 <label class="choose-destination-label" for="destination">
                   Choose a Destination
                   <span aria-hidden="true">*</span>
                 </label>
-                <select name="destination" id="destination" class="choose-destination-dropdown" value aria-required="true" aria-invalid="false" data-validate="notBlank">
+                <select name="destination" id="destination" class="choose-destination-dropdown" aria-required="true" placeholder="List of Destinations">
                   <a href='#' aria-expanded="true">Choose a Destination</a>
+                  <option value="">List of Destinations</option>
                 </select>
-                <!-- <textarea class="choose-destination" id="destination" name="destination" autocomplete="off" type="textarea" value aria-required="true" aria-invalid="false" data-validate="notBlank"></textarea> -->
               </p>
               <p class="create-trip-form">
                 <label for="numTravelers">
