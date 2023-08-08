@@ -28,7 +28,6 @@ const verifyLogin = (e) => {
     e.preventDefault();
     const userID = +loginUserNameField.value.match(/\d+/g);
     const string = loginUserNameField.value.slice(0, 8);
-    console.log(string);
     if (
       string === 'traveler' &&
       Number(userID) > 0 &&
@@ -56,7 +55,7 @@ const verifyLogin = (e) => {
     })
   }
 
-  const displayPendingTrip = () => {
+  const displayPendingTrips = () => {
 
   }
 

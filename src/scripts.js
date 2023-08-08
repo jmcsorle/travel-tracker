@@ -14,6 +14,8 @@ import {
   getUpcomingTrips,
   getTravelerInputs,
   setTripData,
+  getEstimatedLodgingCosts,
+  getTotalEstimatedTripCosts,
 } from './dataModel';
 
 import {
@@ -30,7 +32,7 @@ import {
   tripsPast,
   annualCost,
   chooseDestinationField,
-  numTravlersField,
+  numTravelersField,
   calendarField,
   numDaysField,
   estimatedCostValue,
@@ -44,11 +46,30 @@ import {
 window.addEventListener('load', () => {
   Promise.all(fetchPromises).then(() => {
     setListOfDestinations();
-    console.log('ALL TRIPS', getAllTrips(fetchedData.trips, 25, 'approved'));
-    console.log('PAST TRIPS', getPastTrips(fetchedData.trips, 25));
-    console.log('UPCOMING TRIPS', getUpcomingTrips(fetchedData.trips, 25));
   });
 });
+
+createNewTrip.addEventListener('input', () => {
+  if (numTravelersField.value && numDaysField.value) {
+    const destinationID = parseInt(chooseDestinationField.value);
+    const duration = parseInt(numDaysField.value);
+    const numTravelers = parseInt(numTravelersField.value);
+    const lodgingCosts = getEstimatedLodgingCosts(
+      destinationID,
+      duration,
+      numTravelers
+    );
+    const totalCost = getTotalEstimatedTripCosts(
+      destinationID,
+      lodgingCosts,
+      numTravelers
+    );
+    estimatedCostValue.innerText = `Estimated cost for this trip: ${totalCost}`;
+  } else {
+    estimatedCostValue.innerText = `Please fill out all fields to get an estimated cost.`;
+  }
+});
+
 loginForm.addEventListener('submit', verifyLogin);
 createNewTrip.addEventListener('submit', (e) => {
   e.preventDefault();
@@ -61,7 +82,7 @@ createNewTrip.addEventListener('submit', (e) => {
     },
   })
     .then((travelerInputs) => travelerInputs.json())
-    .then(console.log(travelerInputs))
     .catch((error) => console.log(`Error at ${error}`));
   e.target.reset();
+  estimatedCostValue.innerText = '';
 });
