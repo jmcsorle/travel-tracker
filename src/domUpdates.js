@@ -11,20 +11,22 @@ const loginError = document.querySelector('.login-error');
 const welcomeSection = document.querySelector('.welcome');
 const welcomeUserName = document.querySelector('.welcome-user');
 const dashboardPage = document.querySelector('.dashboard');
+const createNewTrip = document.querySelector('#createTripForm');
 const tripsUpcoming = document.querySelector('.upcoming-trips');
 const tripsPast = document.querySelector('.past-trips');
 const annualCost = document.querySelector('.annual-cost');
 const chooseDestinationField = document.querySelector('#destination');
-const numTravlersField = document.querySelector('#numTravelers');
+const numTravelersField = document.querySelector('#numTravelers');
 const calendarField = document.querySelector('#calendar');
 const numDaysField = document.querySelector('#numDays');
 const estimatedCostValue = document.querySelector('#estimatedCost');
 const tripSubmitButton = document.querySelector('.trip-submit-button');
 
+/* ~~~~~~~ DOM Manipulation Functions ~~~~~~~*/
+
 const verifyLogin = (e) => {
     e.preventDefault();
     const userID = +loginUserNameField.value.match(/\d+/g);
-    console.log(userID);
     const string = loginUserNameField.value.slice(0, 8);
     console.log(string);
     if (
@@ -36,7 +38,6 @@ const verifyLogin = (e) => {
         setTravelerData(fetchedData.travelers, userID)
       loginPage.classList.add('hidden');
       dashboardPage.classList.remove('hidden');
-      //NEED DOM UPDATE FUNCTION HERE
     } else {
       loginError.classList.remove('hidden');
       setTimeout(() => {
@@ -44,6 +45,25 @@ const verifyLogin = (e) => {
       }, 3000);
     }
   };
+
+  const setListOfDestinations = () => {
+    return fetchedData.destinations.forEach(destination => {
+        chooseDestinationField.innerHTML += `
+        <option value="${destination.id}">
+        ${destination.destination}
+        </option>
+        `
+    })
+  }
+
+  const displayPendingTrip = () => {
+
+  }
+
+//   const getDOMUpdates = () {
+
+//   }
+
 
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 
@@ -164,11 +184,13 @@ export {
   tripsUpcoming,
   tripsPast,
   annualCost,
+  createNewTrip,
   chooseDestinationField,
-  numTravlersField,
+  numTravelersField,
   calendarField,
   numDaysField,
   estimatedCostValue,
   tripSubmitButton,
-  verifyLogin
+  verifyLogin,
+  setListOfDestinations
 };
