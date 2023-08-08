@@ -38,7 +38,7 @@ const getTravelerData = () => {
   return travelerData;
 };
 
-/* ~~~~~~~~ Input Form Data Functions ~~~~~~~~ */
+/* ~~~~~~~~ Input Form Data Function ~~~~~~~~ */
 
 const getTravelerInputs = () => {
   const newTripData = {
@@ -84,45 +84,54 @@ const findDestinationName = () => {
 };
 
 const getEstimatedLodgingCosts = (destinationID, duration, numTravelers) => {
-  const costs = fetchedData.destinations.reduce((acc, destination) => {
+  const lodgingCosts = fetchedData.destinations.reduce((acc, destination) => {
     if (destination.id === destinationID)
       acc = destination.estimatedLodgingCostPerDay * duration * numTravelers;
     return acc;
   }, 0);
-  return costs;
+  return lodgingCosts;
 };
 
 const getFlightCostOneTraveler = (destinationID) => {
-  const flightCost = fetchedData.destinations.find((destination) => {
-    if (destination.id === destinationID) {
-      return destination.estimatedFlightCostPerPerson;
-    }
-    return flightCost;
+  const destinationInfo = fetchedData.destinations.find((destination) => {
+    return destination.id === destinationID;
   });
+  if (!destinationInfo) {
+    console.log('Invalid Destination');
+    return `Please complete all fields.`;
+  }
+  return destinationInfo.estimatedFlightCostPerPerson;
 };
 
-const getTotalEstimatedTripCosts = () => {
-  const flightCosts = tripData.numTravelers * estimatedFlightCostPerPerson;
-  const lodgingCosts = tripData.estimatedLodgingCosts * tripData.duration;
-  const travelerAgentFee = (flightCosts + lodgingCosts) * 0.1;
-  const totalTravelCost = flightCosts + lodgingCosts + travelerAgentFee;
+const getTotalEstimatedTripCosts = (destinationID, lodgingCosts, numTravelers) => {
+    console.log('LODGING COST', lodgingCosts);
+    console.log('DESTINATION ID', destinationID);
+    console.log('NUMBER TRAVELERS', numTravelers)
+  const flightCostsSingleTraveler = getFlightCostOneTraveler(destinationID);
+  console.log('FLIGHT COST SINGLE TRAVELER', flightCostsSingleTraveler)
+  const totalFlightCosts = numTravelers * flightCostsSingleTraveler;
+  console.log('TOTAL FLIGHT COSTS', totalFlightCosts);
+  const travelerAgentFee = (totalFlightCosts + lodgingCosts) * 0.1;
+  console.log('TRAVELER AGENT', travelerAgentFee)
+  const totalTravelCost = (totalFlightCosts + lodgingCosts + travelerAgentFee).toFixed(2);
+  console.log('TOTAL COST', totalTravelCost)
   return totalTravelCost;
 };
 
-const setTripData = (e) => {
-  e.preventDefault();
-  tripData.newTripID = parseInt(fetchedData.trips.length + 1);
-  tripData.destinationID = parseInt(chooseDestinationField.value);
-  tripData.destination = findDestinationName();
-  tripData.numTravelers = parseInt(numTravelersField.value);
-  tripData.date = calendarField.value.split('-').join('/');
-  tripData.duration = parseInt(numDaysField.value);
-  tripData.estimatedLodgingCosts = getEstimatedLodgingCosts();
-  tripData.estimatedFlightCostPerPerson = getFlightCostOneTraveler();
-  tripData.totalTripCosts = getTotalEstimatedTripCosts();
-  tripData.status = 'pending';
-  console.log('UPDATED TRIP DATA', tripData);
-};
+// const setTripData = (e) => {
+//   e.preventDefault();
+//   tripData.newTripID = parseInt(fetchedData.trips.length + 1);
+//   tripData.destinationID = parseInt(chooseDestinationField.value);
+//   tripData.destination = findDestinationName();
+//   tripData.numTravelers = parseInt(numTravelersField.value);
+//   tripData.date = calendarField.value.split('-').join('/');
+//   tripData.duration = parseInt(numDaysField.value);
+//   tripData.estimatedLodgingCosts = getEstimatedLodgingCosts();
+//   tripData.estimatedFlightCostPerPerson = getFlightCostOneTraveler();
+//   tripData.totalTripCosts = getTotalEstimatedTripCosts();
+//   tripData.status = 'pending';
+//   console.log('UPDATED TRIP DATA', tripData);
+// };
 
 const getAnnualTripsByUser = (userID) => {
   const totalTrips = fetchedData.trips.reduce((acc, trip) => {
@@ -133,76 +142,6 @@ const getAnnualTripsByUser = (userID) => {
   }, 0);
 };
 
-// ~~~~~~~~~Iteration 1 ~~~~~~~~~~~~~
-
-//helper function to get trip info
-// const getTripInfo = (trips, userID, status) => {
-//     return trips.filter(trip => {
-//         return trip.userID === userID &&
-//         (trip.status === status || status === undefined)
-//     })
-// }
-
-//Travelers dataSet: id = the traveler's ID
-//Trips dataSet: id = Trip#;  userID = traveler#; destinationID = destination#
-//Destinations dataSet id = destination#
-
-//helper function for checking login credentials
-function isValidCredentials(username, password) {
-  const validUsernamePattern = /^traveler\d+$/;
-  return validUsernamePattern.test(username) && password === 'travel';
-}
-
-// const getPastTrips = (userID) => {
-
-//     getTripInfo(fetchedData.trips, 50, 'approved')
-// }
-
-//   const getTotalAnnualSpend = (trips, destinations, id, year) => {
-//     const filterdTripsByYear = trips.filter(trip => trip.userID === id && trip.)
-
-//     }
-
-// Total amount I have spent on trips this year. This should be calculated from the trips data and include a travel agent’s 10% fee
-
-//look up ID in trips - get the desitnation ID, then look up destination ID in destinations and then do math :-(
-//   }
-
-// ~~~~~~~~~Iteration 2 ~~~~~~~~~~~~~
-
-//DOM Manipulation
-
-//have a collection of methods that do nothing other than pull the information from the form - getSelectedTripDate; getSelectedDestination, getSelectedNumberOfTravelers - when you want to display a new trip, you will pull these pieces and then stuff them back into the DOM
-
-//   const displayNewTrip = () => {
-//       //show trip details (date, duration, number of travelers, destination)
-//       //show estimated cost with 10% trave; agent's fee
-//       //status is pending
-//   }
-
-//   const createNewTrip = (travelerID) => {
-//     // select a:
-//         // date
-//         // duration
-//         // number of travelers
-//         // choose from a list of destinations
-//         // estimated cost (with a 10% travel agent fee) for the trip
-
-//   }
-
-//Iteration 4 - Login
-
-//   const getUserLogin = () => {
-//       //get value from userName field and password field
-//   }
-
-/*
-  
-  username: traveler50 (where 50 is the ID of the user)
-  password: travel
-  
-  */
-
 export {
   getCurrentTraveler,
   // getTripInfo
@@ -211,7 +150,9 @@ export {
   getUpcomingTrips,
   getTravelerData,
   setTravelerData,
-  setTripData,
+//   setTripData,
   getAnnualTripsByUser,
   getTravelerInputs,
+  getEstimatedLodgingCosts,
+  getTotalEstimatedTripCosts,
 };
