@@ -3,6 +3,7 @@ import {
   numTravelersField,
   calendarField,
   numDaysField,
+  chooseYear,
 } from './domUpdates';
 
 import { fetchedData } from './apiCalls';
@@ -64,9 +65,10 @@ const getAllTrips = (trips, userID) => {
 };
 
 const getPastTrips = (trips, userID) => {
-  return trips.filter((trip) => {
-    return trip.userID === userID && trip.status === 'approved';
+  const filteredTrips = trips.filter((trip) => {
+   return trip.userID === userID && trip.status === 'approved';
   });
+  return filteredTrips;
 };
 
 const getUpcomingTrips = (trips, userID) => {
@@ -105,43 +107,48 @@ const getFlightCostOneTraveler = (destinationID) => {
   return destinationInfo.estimatedFlightCostPerPerson;
 };
 
-const getTotalEstimatedTripCosts = (destinationID, lodgingCosts, numTravelers) => {
-    console.log('LODGING COST', lodgingCosts);
-    console.log('DESTINATION ID', destinationID);
-    console.log('NUMBER TRAVELERS', numTravelers)
+const getTotalEstimatedTripCosts = (
+  destinationID,
+  lodgingCosts,
+  numTravelers
+) => {
   const flightCostsSingleTraveler = getFlightCostOneTraveler(destinationID);
-  console.log('FLIGHT COST SINGLE TRAVELER', flightCostsSingleTraveler)
   const totalFlightCosts = numTravelers * flightCostsSingleTraveler;
-  console.log('TOTAL FLIGHT COSTS', totalFlightCosts);
   const travelerAgentFee = (totalFlightCosts + lodgingCosts) * 0.1;
-  console.log('TRAVELER AGENT', travelerAgentFee)
-  const totalTravelCost = (totalFlightCosts + lodgingCosts + travelerAgentFee).toFixed(2);
-  console.log('TOTAL COST', totalTravelCost)
+  const totalTravelCost = (
+    totalFlightCosts +
+    lodgingCosts +
+    travelerAgentFee
+  ).toFixed(2);
   return totalTravelCost;
 };
 
-// const setTripData = (e) => {
-//   e.preventDefault();
-//   tripData.newTripID = parseInt(fetchedData.trips.length + 1);
-//   tripData.destinationID = parseInt(chooseDestinationField.value);
-//   tripData.destination = findDestinationName();
-//   tripData.numTravelers = parseInt(numTravelersField.value);
-//   tripData.date = calendarField.value.split('-').join('/');
-//   tripData.duration = parseInt(numDaysField.value);
-//   tripData.estimatedLodgingCosts = getEstimatedLodgingCosts();
-//   tripData.estimatedFlightCostPerPerson = getFlightCostOneTraveler();
-//   tripData.totalTripCosts = getTotalEstimatedTripCosts();
-//   tripData.status = 'pending';
-//   console.log('UPDATED TRIP DATA', tripData);
-// };
-
-const getAnnualTripsByUser = (userID) => {
-  const totalTrips = fetchedData.trips.reduce((acc, trip) => {
-    if (trip.userID === userID) {
-      return (acc += 1);
-    }
-    return totalTrips;
+const getAnnualTripCosts = (userID, year) => {
+  year = chooseYear.value;
+  userID = travelerData.id;
+  const filteredTrips = fetchedData.trips.filter(
+    (trip) =>
+      trip.date.split('/')[0] === year &&
+      trip.userID === userID &&
+      trip.status === 'approved'
+  );
+ const totalCost = fetchedData.destinations.reduce((acc, destination) => {
+    filteredTrips.forEach((trip) => {
+      if (trip.destinationID === destination.id) {
+        const estimatedLodging =
+          trip.travelers *
+          trip.duration *
+          destination.estimatedLodgingCostPerDay;
+        const estimatedFlightCosts =
+          trip.travelers * destination.estimatedFlightCostPerPerson;
+        const subtotal = estimatedLodging + estimatedFlightCosts;
+        const travelAgentFee = subtotal * 0.1;
+        acc += subtotal + travelAgentFee;
+      }
+    });
+    return acc
   }, 0);
+  return totalCost.toFixed(2);
 };
 
 export {
@@ -152,9 +159,11 @@ export {
   getUpcomingTrips,
   getTravelerData,
   setTravelerData,
-//   setTripData,
-  getAnnualTripsByUser,
+  //   setTripData,
+  //   getAnnualTripsByUser,
   getTravelerInputs,
   getEstimatedLodgingCosts,
   getTotalEstimatedTripCosts,
+  getAnnualTripCosts,
+  travelerData,
 };
