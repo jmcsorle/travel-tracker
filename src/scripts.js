@@ -1,6 +1,6 @@
 /* ~~~~~~~ IMPORTS from apiCalls ~~~~~~~*/
 
-import { fetchedData, fetchPromises } from './apiCalls';
+import { fetchPromises } from './apiCalls';
 import './css/normalize.css';
 import './css/styles.css';
 import './css/normalize.css';
@@ -11,14 +11,10 @@ import './images/WanderfulLogo_large.png';
 import './images/WanderfulLogo_small.png';
 
 import {
-  getAllTrips,
-  getPastTrips,
-  getUpcomingTrips,
   getTravelerInputs,
   setTripData,
   getEstimatedLodgingCosts,
   getTotalEstimatedTripCosts,
-  setCalendarToCurrent,
 } from './dataModel';
 
 import {

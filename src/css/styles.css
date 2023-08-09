@@ -4,16 +4,6 @@
   opacity: 1;
 }
 
-::-webkit-scrollbar-track {
-  /* background: #f5f5f5; */
-  border-radius: 10px;
-  }
-  
-  ::-webkit-scrollbar-thumb {
-  border-radius: 10px;
-  /* background: #ccc;   */
-  }
-
 body {
   color: black;
   font-family: 'Marcellus', serif;
@@ -230,7 +220,6 @@ label {
 .new-trip-form h2,
 #year {
   margin-left: 10%;
-
 }
 
 .new-trip-form {
@@ -302,7 +291,6 @@ label {
 }
 
 /* ~~~~~ MEDIA QUERIES ~~~~~ */
-
 
 @media only screen and (min-width: 768px) {
 

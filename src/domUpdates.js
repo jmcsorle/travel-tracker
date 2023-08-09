@@ -1,15 +1,12 @@
 import {
   setTravelerData,
-  getTravelerData,
   getAnnualTripCosts,
   travelerData,
   getPastTrips,
   getUpcomingTrips,
-  setTripData,
-  tripData,
-  findDestinationName,
   getTravelerInputs,
 } from './dataModel';
+
 import { fetchedData } from './apiCalls';
 
 /* ~~~~~~~~~~ Query Selectors  ~~~~~~~~~~*/
@@ -38,7 +35,7 @@ const congratsMessage = document.querySelector('.congratulations');
 
 const verifyLogin = (e) => {
   e.preventDefault();
-  const userID = +loginUserNameField.value.match(/\d+/g);
+  const userID = +loginUserNameField.value.match(/\d+$/);
   const string = loginUserNameField.value.slice(0, 8);
   if (
     string === 'traveler' &&
