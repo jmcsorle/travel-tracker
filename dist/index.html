@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <!-- <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Wanderful Travel Adventures</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -12,25 +12,25 @@
 <body>
   <main>
     <header class="logo">
-      <img src="./images/turing-logo.png" alt="turing logo" width="100" />
-      <h1>Wanderful Travel Adventures</h1>
+      <img src="./images/WanderfulLogo_large.png" alt="Wanderful Travel Logo" class="logo-image" />
+      <h1 class="sr-only">Wanderful Travel Adventures</h1>
       <div class="welcome hidden">
         <h2>Welcome</h2>
         <p class="welcom-user"></p>
       </div>
     </header>
+     <!-- ~~~~~~~ Begin Login ~~~~~~~~ -->
     <section class="login-screen">
       <div class="login-grid">
         <div class="login-left-side"></div>
         <div class="login-right-side">
-          <form class="login-form">
+          <form class="login-form rounded-corner">
             <h2 class="form-heading">Please login</h2>
             <p class="login-form">
               <label class="login-username-field" for="username">
                 User Name
                 <span aria-hidden="true">*</span>
               </label>
-              <!-- <input type="text" class="username-field" id="username" name="username" autocomplete="off" value aria-required="true" aria-invalid="false" data-validate="notBlank" /> -->
               <input type="text" class="username-field" id="username" name="username" />
             </p>
             <p class="login-form">
@@ -40,26 +40,28 @@
               </label>
               <input type ="password" class="password-field" id="password" name="password" autocomplete="off" type="textarea" value aria-required="true" aria-invalid="false" data-validate="notBlank"></textarea>
             </p>
-            <input type="submit" class="login-submit-button" type="submit" value="Login"/>
-            <!-- Login -->
+            <input type="submit" class="submit-button" type="submit" value="Login" />
             <p class="login-error hidden">Invalid login. Please try again.</p>
           </form>
+           <!-- ~~~~~~~~ End Login ~~~~~~~~ -->
         </div>
       </div>
     </section>
     <section class="dashboard hidden">
       <div class="outer-grid-dashboard">
         <div class="left-side">
-          <div class="upcoming-trips">
+          <div class="upcoming-trips rounded-corner">
             <h2>Upcoming Trips</h2>
           </div>
-          <div class="past-trips">
+          <div class="past-trips rounded-corner">
             <h2>Past Trips</h2>
           </div>
         </div>
         <div class="right-side">
-          <div class="annual-cost">
-            <label class="choose-year" for="year">
+           <!-- ~~~~~~ Begin Annual Costs ~~~~~~~ -->
+          <div class="annual-cost rounded-corner">
+            <h2>Annual Spend</h2>
+            <label class="choose-year sr-only" for="year">
               See Annual Spend
               <span aria-hidden="true">*</span>
             </label>
@@ -74,8 +76,10 @@
             </select>
             <p class="amount-spent hidden">You spent</p>
           </div>
-          <div class="new-trip-form">
-            <h2>Book Your Next Wanderful Adventure!</h2>
+           <!-- ~~~~~~~ End Annual Cost ~~~~~~~~ -->
+            <!-- ~~~~~~~ Begin New Trip Form ~~~~~~~~ -->
+          <div class="new-trip-form rounded-corner">
+            <h2 class="trip-heading">Book Your Next Adventure!</h2>
             <form action="http://localhost:3001/api/v1/trips" method="post" id="createTripForm" class="create-trip-form">
               <p class="create-trip-form">
                 <label class="choose-destination-label" for="destination">
@@ -92,9 +96,9 @@
                   Number of Travelers
                   <span aria-hidden="true">*</span>
                 </label>
-                <input type="number" id="numTravelers" placeholder="Enter number of travelers" min="1" value aria-required="true" aria-invalid="false" data-validate="notBlank">
+                <input type="number" id="numTravelers" placeholder="Choose a number" min="1" value aria-required="true" aria-invalid="false" data-validate="notBlank">
               </p>
-              <p"create-trip-form">
+              <p class="create-trip-form">
                 <label for="calendar" class="calendar-form">
                   Choose a Departure Date
                   <span aria-hidden="true">*</span>
@@ -106,11 +110,12 @@
                   Choose number of days
                   <span aria-hidden="true">*</span>
                 </label>
-                <input type="number" id="numDays" placeholder="Enter number of days" min="1" value aria-required="true" aria-invalid="false" data-validate="notBlank">
+                <input type="number" id="numDays" placeholder="Choose a number" min="1" value aria-required="true" aria-invalid="false" data-validate="notBlank">
               </p>
               <p class="create-trip-form" id="estimatedCost"></p>
-              <button class="trip-submit-button" type="submit">Submit</button>
+              <button class="submit-button" type="submit">Book Trip</button>
             </form>
+            <!-- ~~~~~~~ End New Trip Form ~~~~~~~~ -->
           </div>
         </div>
       </div>

@@ -92,7 +92,7 @@ const displayPastTrips = () => {
     `;
     return acc + tripHTML
   }, '');
-  tripsPast.innerHTML = tripsHTML
+  tripsPast.innerHTML += tripsHTML
 };
 
 const displayUpcomingTrips = () => {
@@ -109,7 +109,7 @@ const displayUpcomingTrips = () => {
       `;
       return acc + tripHTML
     }, '');
-    tripsUpcoming.innerHTML = tripsHTML
+    tripsUpcoming.innerHTML += tripsHTML
 };
 
 export {
