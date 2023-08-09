@@ -1,26 +1,26 @@
 const fetchedData = {};
 
 const fetchAPIData = (dataSet) => {
-    return fetch(`http://localhost:3001/api/v1/${dataSet}`)
+  return fetch(`http://localhost:3001/api/v1/${dataSet}`)
     .then(response => {
-        if (!response.ok) {
-            console.log(`Failed to GET ${dataSet}`);
-            return Promise.reject();
-        }
-        if (response.status !== 200) {
-            console.log(`Received status ${response.status}`);
-            return Promise.reject();
-        }
-        return response.json()
+      if (!response.ok) {
+        console.log(`Failed to GET ${dataSet}`);
+        return Promise.reject();
+      }
+      if (response.status !== 200) {
+        console.log(`Received status ${response.status}`);
+        return Promise.reject();
+      }
+      return response.json()
     })
     .then(data => fetchedData[dataSet] = data[dataSet])
     .catch(error => console.error ('Received Error from Catch', error))
 }
 
 const fetchPromises = [
-    fetchAPIData('travelers'),
-    fetchAPIData('trips'),
-    fetchAPIData('destinations')
+  fetchAPIData('travelers'),
+  fetchAPIData('trips'),
+  fetchAPIData('destinations')
 ]
 
 /* ~~~~~~~~~~ POST ~~~~~~~~~~
@@ -46,6 +46,6 @@ Sample Successful Response Message:
 */
 
 export {
-    fetchedData,
-    fetchPromises
+  fetchedData,
+  fetchPromises
 }

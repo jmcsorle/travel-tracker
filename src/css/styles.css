@@ -13,14 +13,14 @@ body {
 }
 
 header {
-	display: flex;
+  display: flex;
   align-items: center;
   justify-content: space-between;
-	background: radial-gradient(circle, rgb(2, 131, 160) 0%, rgba(163, 222, 246, 1) 100%);
-	width: 100vw;
-	margin-left: 0;
-	padding: 0;
-	border-bottom: 6px solid #333333
+  background: radial-gradient(circle, rgb(2, 131, 160) 0%, rgba(163, 222, 246, 1) 100%);
+  width: 100vw;
+  margin-left: 0;
+  padding: 0;
+  border-bottom: 6px solid #333333
 }
 
 .welcome {
@@ -42,21 +42,10 @@ header {
 header img {
   padding: 2em;
   margin: 1em;
-
 }
 
 .logo-image {
   width: 75%;
-}
-
-h1 {
-  border-color: 1px solid azure;
-  background-color: azure;
-  padding: .25em;
-  border-radius: 12px;
-  font-size: 2.5rem;
-  max-width: 30%;
-
 }
 
 h2 {
@@ -194,7 +183,6 @@ label {
   padding: .25em 1em;
   margin: 1em 0 1em 0;
   background-color: #F0FFFF;
-  
 }
 
 .right-side {
@@ -296,11 +284,6 @@ label {
 
 	/* ~~~~~ GRID COMPONENTS ~~~~~ */
 
-  header img {
-    padding: 2em;
-    margin: 1em;
-  }
-
   .logo-image {
     width: auto;
   }
@@ -325,6 +308,18 @@ label {
 		"upcoming-trips"	
     "past-trips";
 	}
+
+  .right-side {
+    grid-area: right-side;
+    margin-left: .75em;
+    margin-right: 1em;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 30% auto;
+    grid-template-areas:
+      "annual-cost"
+      "form";
+  }
 
 	.annual-cost {
 		grid-area: annual-cost;

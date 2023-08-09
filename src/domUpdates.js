@@ -112,7 +112,8 @@ const displayPastTrips = () => {
     <div class="destination-text">
         <h3 class="destination-heading">${destination.destination}</h3>
     <div class="destination-image">
-        <img src="${destination.image}" width="50%" height="50%" alt="${destination.alt}">
+        <img src="${destination.image}" 
+        width="60%" height="60%" alt="${destination.alt}">
     </div>
     </div>
     `;
@@ -131,7 +132,8 @@ const displayUpcomingTrips = () => {
       <div class="destination-text">
           <h3 class="destination-heading">${destination.destination}</h3>
       <div class="destination-image">
-          <img src="${destination.image}" width="50%" height="50%" alt="${destination.alt}">
+          <img src="${destination.image}" 
+          width="60%" height="60%" alt="${destination.alt}">
       </div>
       </div>
       `;
@@ -149,7 +151,8 @@ const updateUpcomingTrips = () => {
         <div class="destination-text">
             <h3 class="destination-heading">${destination.destination}</h3>
         <div class="destination-image">
-            <img src="${destination.image}" width="50%" height="50%" alt="${destination.alt}">
+            <img src="${destination.image}" 
+            width="60%" height="60%" alt="${destination.alt}">
         </div>
         </div>
         `;
