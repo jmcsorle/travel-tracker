@@ -78,14 +78,16 @@ createNewTrip.addEventListener('submit', (e) => {
     },
   })
     .then((travelerInputs) => travelerInputs.json())
+    .then(() => {
+      setTripData();
+      updateUpcomingTrips();
+      e.target.reset();
+      estimatedCostValue.innerText = '';
+      congratsMessage.classList.remove('hidden');
+      displayCongratuationsMessage();
+      setTimeout(() => {
+        congratsMessage.classList.add('hidden');
+      }, 8000);
+    })
     .catch((error) => console.log(`Error at ${error}`));
-  setTripData();
-  updateUpcomingTrips();
-  e.target.reset();
-  estimatedCostValue.innerText = '';
-  congratsMessage.classList.remove('hidden');
-  displayCongratuationsMessage();
-  setTimeout(() => {
-    congratsMessage.classList.add('hidden');
-  }, 8000);
 });
