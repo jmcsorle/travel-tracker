@@ -4,7 +4,11 @@ import {
   getAnnualTripCosts,
   travelerData,
   getPastTrips,
-  getUpcomingTrips
+  getUpcomingTrips,
+  setTripData,
+  tripData,
+  findDestinationName,
+  getTravelerInputs,
 } from './dataModel';
 import { fetchedData } from './apiCalls';
 
@@ -13,7 +17,6 @@ const loginPage = document.querySelector('.login-screen');
 const loginForm = document.querySelector('.login-form');
 const loginUserNameField = document.querySelector('.username-field');
 const loginPasswordField = document.querySelector('.password-field');
-const loginButton = document.querySelector('.login-submit-button');
 const loginError = document.querySelector('.login-error');
 const welcomeSection = document.querySelector('.welcome');
 const welcomeUserName = document.querySelector('.welcome-user');
@@ -29,7 +32,7 @@ const numTravelersField = document.querySelector('#numTravelers');
 const calendarField = document.querySelector('#calendar');
 const numDaysField = document.querySelector('#numDays');
 const estimatedCostValue = document.querySelector('#estimatedCost');
-const tripSubmitButton = document.querySelector('.trip-submit-button');
+const congratsMessage = document.querySelector('.congratulations');
 
 /* ~~~~~~~ DOM Manipulation Functions ~~~~~~~*/
 
@@ -44,8 +47,10 @@ const verifyLogin = (e) => {
     loginPasswordField.value === 'travel'
   ) {
     setTravelerData(fetchedData.travelers, userID);
+    displayTravelerWelcome();
     displayUpcomingTrips();
     displayPastTrips();
+    setCalendarToCurrent();
     loginPage.classList.add('hidden');
     dashboardPage.classList.remove('hidden');
   } else {
@@ -66,6 +71,28 @@ const setListOfDestinations = () => {
   });
 };
 
+const displayTravelerWelcome = () => {
+  if (travelerData.id) {
+    welcomeSection.classList.remove('hidden');
+    welcomeUserName.innerText = `${travelerData.name}`;
+  }
+};
+
+const displayCongratuationsMessage = () => {
+  congratsMessage.innerHTML = `
+    <p>Congratulations on booking your trip! You will soon be on your way!</p>
+    <p>A travel agent will contact you within 24 hours.</p>`;
+};
+
+const setCalendarToCurrent = () => {
+  const today = new Date();
+  const todayString = `${today.getFullYear()}-${(
+    '0' +
+    (today.getMonth() + 1)
+  ).slice(-2)}-${('0' + today.getDate()).slice(-2)}`;
+  calendarField.setAttribute('min', todayString);
+};
+
 const displayAnnualSpend = () => {
   const year = chooseYear.value;
   const userID = travelerData.id;
@@ -81,7 +108,9 @@ const displayAnnualSpend = () => {
 const displayPastTrips = () => {
   const pastTrips = getPastTrips(fetchedData.trips, travelerData.id);
   const tripsHTML = pastTrips.reduce((acc, trip) => {
-    const destination = fetchedData.destinations.find(destination => destination.id === trip.destinationID);
+    const destination = fetchedData.destinations.find(
+      (destination) => destination.id === trip.destinationID
+    );
     const tripHTML = `
     <div class="destination-text">
         <h3 class="destination-heading">${destination.destination}</h3>
@@ -90,16 +119,18 @@ const displayPastTrips = () => {
     </div>
     </div>
     `;
-    return acc + tripHTML
+    return acc + tripHTML;
   }, '');
-  tripsPast.innerHTML += tripsHTML
+  tripsPast.innerHTML += tripsHTML;
 };
 
 const displayUpcomingTrips = () => {
-    const upcomingTrips = getUpcomingTrips(fetchedData.trips, travelerData.id);
-    const tripsHTML = upcomingTrips.reduce((acc, trip) => {
-      const destination = fetchedData.destinations.find(destination => destination.id === trip.destinationID);
-      const tripHTML = `
+  const upcomingTrips = getUpcomingTrips(fetchedData.trips, travelerData.id);
+  const tripsHTML = upcomingTrips.reduce((acc, trip) => {
+    const destination = fetchedData.destinations.find(
+      (destination) => destination.id === trip.destinationID
+    );
+    const tripHTML = `
       <div class="destination-text">
           <h3 class="destination-heading">${destination.destination}</h3>
       <div class="destination-image">
@@ -107,9 +138,25 @@ const displayUpcomingTrips = () => {
       </div>
       </div>
       `;
-      return acc + tripHTML
-    }, '');
-    tripsUpcoming.innerHTML += tripsHTML
+    return acc + tripHTML;
+  }, '');
+  tripsUpcoming.innerHTML += tripsHTML;
+};
+
+const updateUpcomingTrips = () => {
+  const currentTrip = getTravelerInputs();
+  const destination = fetchedData.destinations.find(
+    (destination) => destination.id === currentTrip.destinationID
+  );
+  const tripHTML = `
+        <div class="destination-text">
+            <h3 class="destination-heading">${destination.destination}</h3>
+        <div class="destination-image">
+            <img src="${destination.image}" width="50%" height="50%" alt="${destination.alt}">
+        </div>
+        </div>
+        `;
+  tripsUpcoming.innerHTML += tripHTML;
 };
 
 export {
@@ -117,7 +164,6 @@ export {
   loginForm,
   loginUserNameField,
   loginPasswordField,
-  loginButton,
   loginError,
   dashboardPage,
   welcomeSection,
@@ -131,10 +177,12 @@ export {
   calendarField,
   numDaysField,
   estimatedCostValue,
-  tripSubmitButton,
   chooseYear,
   verifyLogin,
   setListOfDestinations,
-  //   setListOfYears,
   displayAnnualSpend,
+  displayCongratuationsMessage,
+  congratsMessage,
+  setCalendarToCurrent,
+  updateUpcomingTrips,
 };

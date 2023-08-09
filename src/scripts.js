@@ -18,33 +18,23 @@ import {
   setTripData,
   getEstimatedLodgingCosts,
   getTotalEstimatedTripCosts,
+  setCalendarToCurrent,
 } from './dataModel';
 
 import {
-  loginButton,
   loginForm,
-  loginPage,
-  loginUserNameField,
-  loginPasswordField,
-  loginError,
-  dashboardPage,
-  welcomeSection,
-  welcomeUserName,
-  tripsUpcoming,
-  tripsPast,
-  annualCost,
   chooseDestinationField,
   numTravelersField,
-  calendarField,
   numDaysField,
   estimatedCostValue,
-  tripSubmitButton,
   verifyLogin,
   setListOfDestinations,
   createNewTrip,
-//   setListOfYears,
   displayAnnualSpend,
-  chooseYear
+  chooseYear,
+  displayCongratuationsMessage,
+  congratsMessage,
+  updateUpcomingTrips,
 } from './domUpdates';
 
 /* ~~~~~~~~~~ EVENT LISTENERS ~~~~~~~~~~*/
@@ -55,13 +45,13 @@ window.addEventListener('load', () => {
 });
 
 chooseYear.addEventListener('change', () => {
-    displayAnnualSpend()
-})
+  displayAnnualSpend();
+});
 
 createNewTrip.addEventListener('input', () => {
-    if (!chooseDestinationField.value) {
-        estimatedCostValue.innerText = `Please fill out all fields to get an estimated cost.`;
-    } else if (numTravelersField.value && numDaysField.value) {
+  if (!chooseDestinationField.value) {
+    estimatedCostValue.innerText = `Please fill out all fields to get an estimated cost.`;
+  } else if (numTravelersField.value && numDaysField.value) {
     const destinationID = parseInt(chooseDestinationField.value);
     const duration = parseInt(numDaysField.value);
     const numTravelers = parseInt(numTravelersField.value);
@@ -76,12 +66,11 @@ createNewTrip.addEventListener('input', () => {
       numTravelers
     );
     estimatedCostValue.innerText = `Estimated cost for this trip: ${totalCost}`;
-//   }
-}
+  }
 });
-// });
 
 loginForm.addEventListener('submit', verifyLogin);
+
 createNewTrip.addEventListener('submit', (e) => {
   e.preventDefault();
   const travelerInputs = getTravelerInputs();
@@ -94,6 +83,13 @@ createNewTrip.addEventListener('submit', (e) => {
   })
     .then((travelerInputs) => travelerInputs.json())
     .catch((error) => console.log(`Error at ${error}`));
+  setTripData();
+  updateUpcomingTrips();
   e.target.reset();
   estimatedCostValue.innerText = '';
+  congratsMessage.classList.remove('hidden');
+  displayCongratuationsMessage();
+  setTimeout(() => {
+    congratsMessage.classList.add('hidden');
+  }, 8000);
 });
