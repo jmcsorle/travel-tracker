@@ -11,19 +11,7 @@ import { fetchedData } from './apiCalls';
 /* ~~~~~~~~~~ DATA MODEL ~~~~~~~~~~*/
 let travelerData = {};
 
-let tripData = {
-  newTripID: 0,
-  destinationID: 0,
-  destination: '',
-  estimatedLodgingCosts: 0,
-  estimatedFlightCostPerPerson: 0,
-  totalTripCosts: 0,
-  numTravelers: 0,
-  date: 'yyyy/mm/dd',
-  duration: 0,
-  status: '',
-  suggestedActivities: [],
-};
+let tripData = {};
 
 /* ~~~~~~~~ Traveler Data Functions ~~~~~~~~ */
 
@@ -38,6 +26,11 @@ const setTravelerData = (travelers, userID) => {
 const getTravelerData = () => {
   return travelerData;
 };
+
+const setTripData = () => {
+  tripData = getTravelerInputs();
+  return tripData
+}
 
 /* ~~~~~~~~ Input Form Data Function ~~~~~~~~ */
 
@@ -77,13 +70,13 @@ const getUpcomingTrips = (trips, userID) => {
   });
 };
 
-// const findDestinationName = () => {
-//   const destinationName = fetchedData.destinations.find((destination) => {
-//     if (destination.id === tripData.destinationID) {
-//       return destinationName;
-//     }
-//   });
-// };
+const findDestinationName = (destinationID) => {
+  const destinationName = fetchedData.destinations.find((destination) => {
+    if (destination.id === tripData.destinationID) {
+      return destinationName;
+    }
+  });
+};
 
 //calculation to feed into DOM function
 
@@ -166,4 +159,7 @@ export {
   getTotalEstimatedTripCosts,
   getAnnualTripCosts,
   travelerData,
+  setTripData,
+  tripData,
+  findDestinationName,
 };
