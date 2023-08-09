@@ -79,8 +79,9 @@ const findDestinationName = (destinationID) => {
 
 const getEstimatedLodgingCosts = (destinationID, duration, numTravelers) => {
   const lodgingCosts = fetchedData.destinations.reduce((acc, destination) => {
-    if (destination.id === destinationID)
+    if (destination.id === destinationID) {
       acc = destination.estimatedLodgingCostPerDay * duration * numTravelers;
+    }
     return acc;
   }, 0);
   return lodgingCosts;
