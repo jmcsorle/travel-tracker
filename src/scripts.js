@@ -7,6 +7,8 @@ import './css/normalize.css';
 import './images/turing-logo.png';
 import './images/road.jpg';
 import './images/ocean.jpg';
+import './images/WanderfulLogo_large.png';
+import './images/WanderfulLogo_small.png';
 
 import {
   getAllTrips,
