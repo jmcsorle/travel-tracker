@@ -29,8 +29,8 @@ const getTravelerData = () => {
 
 const setTripData = () => {
   tripData = getTravelerInputs();
-  return tripData
-}
+  return tripData;
+};
 
 /* ~~~~~~~~ Input Form Data Function ~~~~~~~~ */
 
@@ -45,7 +45,6 @@ const getTravelerInputs = () => {
     status: 'pending',
     suggestedActivities: [],
   };
-
   return newTripData;
 };
 
@@ -59,7 +58,7 @@ const getAllTrips = (trips, userID) => {
 
 const getPastTrips = (trips, userID) => {
   const filteredTrips = trips.filter((trip) => {
-   return trip.userID === userID && trip.status === 'approved';
+    return trip.userID === userID && trip.status === 'approved';
   });
   return filteredTrips;
 };
@@ -77,8 +76,6 @@ const findDestinationName = (destinationID) => {
     }
   });
 };
-
-//calculation to feed into DOM function
 
 const getEstimatedLodgingCosts = (destinationID, duration, numTravelers) => {
   const lodgingCosts = fetchedData.destinations.reduce((acc, destination) => {
@@ -125,7 +122,7 @@ const getAnnualTripCosts = (userID, year) => {
       trip.userID === userID &&
       trip.status === 'approved'
   );
- const totalCost = fetchedData.destinations.reduce((acc, destination) => {
+  const totalCost = fetchedData.destinations.reduce((acc, destination) => {
     filteredTrips.forEach((trip) => {
       if (trip.destinationID === destination.id) {
         const estimatedLodging =
@@ -139,21 +136,18 @@ const getAnnualTripCosts = (userID, year) => {
         acc += subtotal + travelAgentFee;
       }
     });
-    return acc
+    return acc;
   }, 0);
   return totalCost.toFixed(2);
 };
 
 export {
   getCurrentTraveler,
-  // getTripInfo
   getAllTrips,
   getPastTrips,
   getUpcomingTrips,
   getTravelerData,
   setTravelerData,
-  //   setTripData,
-  //   getAnnualTripsByUser,
   getTravelerInputs,
   getEstimatedLodgingCosts,
   getTotalEstimatedTripCosts,

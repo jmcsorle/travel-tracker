@@ -6,8 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Wanderful Travel Adventures</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Marcellus&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Marcellus&display=swap" rel="stylesheet">
 </head>
 <body>
   <main>
@@ -19,7 +19,6 @@
         <p class="welcome-user"></p>
       </div>
     </header>
-     <!-- ~~~~~~~ Begin Login ~~~~~~~~ -->
     <section class="login-screen">
       <div class="login-grid">
         <div class="login-left-side"></div>
@@ -43,7 +42,6 @@
             <input type="submit" class="login-submit-button" type="submit" value="Login" />
             <p class="login-error hidden">Invalid login. Please try again.</p>
           </form>
-           <!-- ~~~~~~~~ End Login ~~~~~~~~ -->
         </div>
       </div>
     </section>
@@ -58,7 +56,6 @@
           </div>
         </div>
         <div class="right-side">
-           <!-- ~~~~~~ Begin Annual Costs ~~~~~~~ -->
           <div class="annual-cost rounded-corner">
             <h2>Annual Spend</h2>
             <label class="choose-year sr-only" for="year">
@@ -76,8 +73,6 @@
             </select>
             <p class="amount-spent hidden">You spent</p>
           </div>
-           <!-- ~~~~~~~ End Annual Cost ~~~~~~~~ -->
-            <!-- ~~~~~~~ Begin New Trip Form ~~~~~~~~ -->
           <div class="new-trip-form rounded-corner">
             <h2 class="trip-heading">Book Your Next Adventure!</h2>
             <form action="http://localhost:3001/api/v1/trips" method="post" id="createTripForm" class="create-trip-form">
@@ -106,7 +101,7 @@
                 <input type="date" id="calendar" class="calendar-form" value aria-required="true" aria-invalid="false" data-validate="notBlank">
               </p>
               <p class="create-trip-form">
-                <label for="duration">
+                <label for="numDays">
                   Choose number of days
                   <span aria-hidden="true">*</span>
                 </label>
@@ -116,15 +111,11 @@
               <button class="submit-button" type="submit">Book Trip</button>
               <div class="congratulations hidden"></div>
             </form>
-            <!-- ~~~~~~~ End New Trip Form ~~~~~~~~ -->
           </div>
         </div>
       </div>
     </section>
   </main>
-  
-  <!-- Do not include the scripts.js or class files here - it is done by the webpack server -->
   <script src="bundle.js"></script>
-
 </body>
 </html>
